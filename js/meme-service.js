@@ -31,18 +31,10 @@ var gImgs = [
 ];
 
 
-// function getMemes() {
-//     return 
-// }
-
 function getMeme() {
     return gMeme;
 }
 
-function setFont(font) {
-    gMeme.lines[gMeme.lineIdx].fontStyle = font
-    console.log(gMeme);
-}
 
 function setNewLine() {
     var currLine = gMeme.lines[gMeme.lineIdx]
@@ -50,29 +42,55 @@ function setNewLine() {
     newLine.txt = ''
     if (gMeme.lines.length) gMeme.lineIdx++
         gMeme.lines.push(newLine)
-    console.log(gMeme);
-
 }
 
 
-function setLineChange() {
+function changeLine() {
     gMeme.lineIdx++
         if (!gMeme.lines[gMeme.lineIdx]) gMeme.lineIdx = 0;
-    console.log(gMeme);
+
 }
 
 
 function deleteLine() {
-    console.log(gMeme.lineIdx);
-    if (gMeme.lines.length) gMeme.lines.splice(gMeme.lineIdx, 1)
-    else gMeme.lines[gMeme.lineIdx].txt = ''
-    if (gMeme.lineIdx) gMeme.lineIdx--
-        console.log(gMeme.lineIdx);
-    console.log(gMeme);
+    if (gMeme.lineIdx === 0) gMeme.lines[gMeme.lineIdx].txt = ''
+    else {
+        gMeme.lines.splice(gMeme.lineIdx, 1)
+        gMeme.lineIdx--
+    }
 }
 
 
 
+function changeFont(font) {
+    gMeme.lines[gMeme.lineIdx].fontStyle = font
+}
+
+
+function changeFontSize(incOrDec) {
+    gMeme.lines[gMeme.lineIdx].fontSize
+    gMeme.lines[gMeme.lineIdx].fontSize += (incOrDec === 'inc') ? 1 : -1
+}
+
+function changeAlign(direc) {
+    gMeme.lines[gMeme.lineIdx].align = direc
+}
+
+function changeStrokeColor(strokeColor) {
+    gMeme.lines[gMeme.lineIdx].strokeColor = strokeColor;
+
+}
+
+function changeFillColor(fillColor) {
+    gMeme.lines[gMeme.lineIdx].fillColor = fillColor
+
+}
+
+
+function setChangeTxt(ev, txt) {
+    console.log(gMeme.lines[gMeme.lineIdx]);
+    gMeme.lines[gMeme.lineIdx].txt = txt
+}
 
 
 function createMeme(imgId) {
@@ -82,13 +100,14 @@ function createMeme(imgId) {
             lineIdx: 0,
             lines: [{
                 txt: '',
-                fontSize: 0,
-                fontWidth: '1.5',
+                fontSize: 40,
+                fontWidth: '2',
                 fontStyle: 'Impact',
                 align: 'left',
-                color: 'black',
-                offsetX: 0,
-                offsetY: 0
+                fillColor: 'black',
+                strokeColor: 'black',
+                offsetX: 80,
+                offsetY: 80
             }]
 
         }
@@ -97,6 +116,36 @@ function createMeme(imgId) {
         // console.log(gMemes);
 }
 
+
+function setCanvasSizes(width, height) {
+    var currLine = gMeme.lines[gMeme.lineIdx]
+    var x;
+    var y;
+    console.log(currLine.align);
+    switch (currLine.align) {
+        case 'right':
+            x = width - 90
+            y = (height + currLine.fontSize + 10) / 6
+            break;
+
+        case 'center':
+            x = width / 2
+            y = (height + currLine.fontSize + 10) / 6
+            break;
+        case 'left':
+            x = 80
+            y = (height + currLine.fontSize + 10) / 6
+            break;
+
+    }
+    console.log(x, y);
+    gMeme.lines[gMeme.lineIdx].offsetX = x
+    gMeme.lines[gMeme.lineIdx].offsetY = y
+
+    // gMeme.canvasWidth = width
+    // gMeme.canvasHeight = height
+    // console.log(width, height);
+}
 
 function getImgs() {
     return gImgs;

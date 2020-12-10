@@ -12,22 +12,62 @@ function onInit() {
 
 }
 
+function onChangeFontSize(size) {
+    changeFontSize(size)
+    updateCanvasSizes()
+    renderMeme()
 
-
-function onSetFont(font) {
-    setFont(font)
 }
 
-function onSetLineChange() {
-    setLineChange()
+function onChangeFont(font) {
+    changeFont(font)
+    renderMeme()
+}
+
+function onChangeAlign(direc) {
+    changeAlign(direc)
+    updateCanvasSizes()
+    renderMeme()
+
+}
+
+function onChangeStrokeColor(strokeColor) {
+    changeStrokeColor(strokeColor)
+    renderMeme()
+}
+
+function onChangeFillColor(fillColor) {
+    changeFillColor(fillColor)
+    renderMeme()
+}
+
+function onChangeLine() {
+    changeLine()
+        // renderMeme(350,52)
 }
 
 function onSetNewLine() {
     setNewLine()
 }
 
-function onDeleteLine() {
+function onDeleteLine(ev) {
     deleteLine()
+    renderMeme()
+}
+
+function onCreateMeme(imgId) {
+    createMeme(imgId)
+    renderCanvas(imgId)
+    updateCanvasSizes()
+}
+
+function onChangeTxt(ev, txt) {
+    // var regex = /[-!$%^&*()_+|~=`{}[:;<>?,.@#\]]/g
+    // var key = regex.exec(txt)
+    // if (key) txt = key.input
+    setChangeTxt(ev, txt)
+    renderMeme()
+        // renderMeme(ev, 350, 52)
 }
 
 
@@ -38,7 +78,7 @@ function renderGallery(ev) {
     elMemeContainer.style.display = 'none';
     var imgs = getImgs()
     var strHtmls = imgs.map(img => {
-        return `<img  onclick="renderCanvas(${img.id})" src="${img.url}"/>`
+        return `<img  onclick="onCreateMeme(${img.id})" src="${img.url}"/>`
     })
     var elGalleryContainer = document.querySelector('.gallery-container')
     elGalleryContainer.innerHTML = strHtmls.join('')
@@ -51,49 +91,43 @@ function renderCanvas(imgId) {
     var currImg = findImgById(imgId)
     var img = new Image();
     img.src = currImg.url
-    img.onload = () => {
-        gCanvas.width = img.width;
-        gCanvas.height = img.height;
-        // gCtx.imageSmoothingEnabled = false;
-        gCtx.drawImage(img, 0, 0);
-        var elMemeContainer = document.querySelector('.main-container')
-        elMemeContainer.style.display = 'flex';
-        var elGalleryContainer = document.querySelector('.gallery-container')
-        elGalleryContainer.style.display = 'none'
-        gCanvas.style.border = 'none'
-        createMeme(imgId)
-    }
+
+    gCanvas.width = img.width;
+    gCanvas.height = img.height;
+    // gCtx.imageSmoothingEnabled = false;
+    gCtx.drawImage(img, 0, 0);
+    var elMemeContainer = document.querySelector('.main-container')
+    elMemeContainer.style.display = 'flex';
+    var elGalleryContainer = document.querySelector('.gallery-container')
+    elGalleryContainer.style.display = 'none'
+    gCanvas.style.border = 'none'
+
+
+}
+
+function updateCanvasSizes() {
+    setCanvasSizes(gCanvas.width, gCanvas.height)
 }
 
 
-function renderMeme(ev, txt, x = 350, y = 52) {
+function renderMeme() {
+
     var currMeme = getMeme()
+    var currLine = currMeme.lines[currMeme.lineIdx]
+    renderCanvas(currMeme.imgId)
+        // updateCanvasSizes()
 
-    // console.log(ev);
-    if (!checkKey(ev, txt)) return
-    gCtx.font = currMeme.font
-    gCtx.textAlign = 'right'
-    gCtx.lineWidth = '1.5'
-    gCtx.fillText(txt, x, y)
-    gCtx.strokeText(txt, x, y)
+    if (!currMeme.lines.length) return
+    gCtx.textAlign = currLine.align
+    gCtx.lineWidth = currLine.fontWidth
+    gCtx.font = `${currLine.fontSize}px ${currLine.fontStyle} `
+    gCtx.strokeStyle = currLine.strokeColor
+    gCtx.fillStyle = currLine.fillColor
+    gCtx.fillText(currLine.txt, currLine.x, currLine.y)
+    gCtx.strokeText(currLine.txt, currLine.offsetX, currLine.offsetY)
 }
 
-// gCtx.strokeStyle = 'red'
-// gCtx.fillStyle = 'white'
-// gCtx.font = '40px Ariel'
 
 function canvasCord(ev) {
     console.log(ev);
-}
-
-function checkKey(ev, txt, x, y) {
-    console.log(ev);
-    if (ev.key === 'Backspace') {
-        console.log(ev.key);
-        var currMeme = getMeme()
-        if (!currMeme) return
-        currMeme.imgId
-        renderCanvas(currMeme.imgId)
-        return true
-    }
 }

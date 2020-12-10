@@ -20,31 +20,7 @@
                     <li><a href="#">About</a></li>
                 </ul>
                 <nav>
-                    <!-- <img src="imgs-canvas/2.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/003.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/004.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/005.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/006.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/5.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/8.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/9.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/12.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/19.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/Ancient-Aliens.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/drevil.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/img2.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/img4.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/img5.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/img6.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/img11.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/img12.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/leo.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/meme1.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/One-Does-Not-Simply.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/Oprah-You-Get-A.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/patrick.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/putin.jpg" alt=""> -->
-                    <!-- <img src="imgs-canvas/X-Everywhere.jpg" alt=""> -->
+
         </div>
     </header>
     <main class="main-container flex main-layout space-between">
@@ -52,22 +28,22 @@
         <canvas onclick="canvasCord(event)" class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
         <!-- </div> -->
         <div class="meme-operation flex cul align-center">
-            <input onkeyup="renderMeme(event,this.value)" class="meme-txt" type="text" placeholder="Meme Text" name="meme-text" dir="auto">
-            <!-- onkeydown="checkKey(event)" -->
+            <input oninput="onChangeTxt(event,this.value)" class="meme-txt" type="text" placeholder="Meme Text" dir="auto">
+
             <div class="line-manipulate">
-                <button onclick="onSetLineChange()" class="line-manipulate"><img src="img/ICONS/change-lines.png" alt=""></button>
+                <button onclick="onChangeLine()" class="line-manipulate"><img src="img/ICONS/change-lines.png" alt=""></button>
                 <button onclick="onSetNewLine()" class="line-manipulate"><img src="img/ICONS/add.png" alt=""></button>
-                <button onclick="onDeleteLine()" class="line-manipulate"><img src="img/ICONS/trash.png" alt=""></button>
+                <button onclick="onDeleteLine(event)" class="line-manipulate"><img src="img/ICONS/trash.png" alt=""></button>
             </div>
             <div class="text-manipulate">
-                <button><img src="img/ICONS/increase.png" alt=""></button>
-                <button><img src="img/ICONS/decrease.png" alt=""></button>
-                <button><img src="img/ICONS/align-to-left.png" alt=""></button>
-                <button><img src="img/ICONS/center-text-alignment.png" alt=""></button>
-                <button><img src="img/ICONS/align-to-right.png" alt=""></button>
+                <button><img onclick="onChangeFontSize('inc')" src="img/ICONS/increase.png" alt=""></button>
+                <button><img onclick="onChangeFontSize('dec')" src="img/ICONS/decrease.png" alt=""></button>
+                <button><img onclick="onChangeAlign('left')" src="img/ICONS/align-to-left.png" alt=""></button>
+                <button><img onclick="onChangeAlign('center')" src="img/ICONS/center-text-alignment.png" alt=""></button>
+                <button><img onclick="onChangeAlign('right')" src="img/ICONS/align-to-right.png" alt=""></button>
             </div>
             <div class="text-style">
-                <select onchange="onSetFont(this.value)" name="select-fonts">
+                <select onchange="onChangeFont(this.value)" name="select-fonts">
                     <option value="impect">Impect</option>
                     <option value="impect">Impect</option>
                     <option value="">Impect</option>
@@ -75,11 +51,11 @@
                 </select>
                 <label for="stroke-color">
                     <img src="img/ICONS/text stroke.png" alt="">
-                    <input type="color" id="stroke-color">
+                    <input oninput="onChangeStrokeColor(this.value)" type="color" id="stroke-color">
               </label>
                 <label for="font-color">
                     <img src="img/ICONS/paint-board-and-brush.png">
-                    <input type="color" id="font-color">
+                    <input oninput="onChangeFillColor(this.value)" type="color" id="font-color">
               </label>
             </div>
             <div class="done flex">
@@ -100,13 +76,16 @@
     </footer>
 
 
-
-
-
-    <script src="/js/meme-service.js"></script>
+    <!-- <script src="/js/meme-service.js"></script>
     <script src="/js/meme-controller.js"></script>
     <script src="/js/meme-storage.js"></script>
-    <script src="/js/meme-util.js"></script>
+    <script src="/js/meme-util.js"></script> -->
+
+    <script src="js/meme-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+    <script src="js/meme-storage.js"></script>
+    <script src="js/meme-util.js"></script>
+
 </body>
 
 </html>
