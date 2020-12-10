@@ -18,7 +18,6 @@ var gImgs = [
     { id: 13, url: 'imgs-canvas/img2.jpg', keywords: ['Funny', 'Victory'] },
     { id: 14, url: 'imgs-canvas/img4.jpg', keywords: ['Funny', 'Men', 'Angry', 'Celeb'] },
     { id: 15, url: 'imgs-canvas/img5.jpg', keywords: ['Cute', 'Happy'] },
-    { id: 16, url: 'imgs-canvas/img6.jpg', keywords: ['Animals', 'Cute', 'Funny'] },
     { id: 17, url: 'imgs-canvas/img11.jpg', keywords: ['Happy', 'Funny', 'Men', 'Celeb'] },
     { id: 18, url: 'imgs-canvas/img12.jpg', keywords: ['Men', 'Akward'] },
     { id: 19, url: 'imgs-canvas/leo.jpg', keywords: ['Happy', 'Men', 'Celeb'] },
@@ -35,7 +34,6 @@ function getMeme() {
     return gMeme;
 }
 
-
 function setNewLine() {
     var currLine = gMeme.lines[gMeme.lineIdx]
     var newLine = {...currLine }
@@ -44,13 +42,11 @@ function setNewLine() {
         gMeme.lines.push(newLine)
 }
 
-
 function changeLine() {
     gMeme.lineIdx++
         if (!gMeme.lines[gMeme.lineIdx]) gMeme.lineIdx = 0;
 
 }
-
 
 function deleteLine() {
     if (gMeme.lineIdx === 0) gMeme.lines[gMeme.lineIdx].txt = ''
@@ -60,12 +56,9 @@ function deleteLine() {
     }
 }
 
-
-
 function changeFont(font) {
     gMeme.lines[gMeme.lineIdx].fontStyle = font
 }
-
 
 function changeFontSize(incOrDec) {
     gMeme.lines[gMeme.lineIdx].fontSize
@@ -86,12 +79,9 @@ function changeFillColor(fillColor) {
 
 }
 
-
-function setChangeTxt(ev, txt) {
-    console.log(gMeme.lines[gMeme.lineIdx]);
+function setChangeTxt(txt) {
     gMeme.lines[gMeme.lineIdx].txt = txt
 }
-
 
 function createMeme(imgId) {
     gMeme = {
@@ -99,15 +89,15 @@ function createMeme(imgId) {
             imgId,
             lineIdx: 0,
             lines: [{
-                txt: '',
-                fontSize: 40,
+                txt: 'Create Your Meme',
+                fontSize: 35,
                 fontWidth: '2',
                 fontStyle: 'Impact',
                 align: 'left',
                 fillColor: 'black',
                 strokeColor: 'black',
-                offsetX: 80,
-                offsetY: 80
+                offsetX: 0,
+                offsetY: 0
             }]
 
         }
@@ -116,35 +106,32 @@ function createMeme(imgId) {
         // console.log(gMemes);
 }
 
-
 function setCanvasSizes(width, height) {
     var currLine = gMeme.lines[gMeme.lineIdx]
     var x;
     var y;
-    console.log(currLine.align);
+
     switch (currLine.align) {
         case 'right':
-            x = width - 90
-            y = (height + currLine.fontSize + 10) / 6
+            x = width - 75
+            y = (height + currLine.fontSize + 10) / 8
             break;
 
         case 'center':
             x = width / 2
-            y = (height + currLine.fontSize + 10) / 6
+            y = (height + currLine.fontSize + 10) / 8
             break;
         case 'left':
-            x = 80
-            y = (height + currLine.fontSize + 10) / 6
+            x = 75
+            y = (height + currLine.fontSize + 10) / 8
             break;
 
     }
-    console.log(x, y);
+    //if the canvas sizes too small
+    if (height < 250 && currLine.align == 'left') x -= 50
+    if (height < 250 && currLine.align == 'right') x += 50
     gMeme.lines[gMeme.lineIdx].offsetX = x
     gMeme.lines[gMeme.lineIdx].offsetY = y
-
-    // gMeme.canvasWidth = width
-    // gMeme.canvasHeight = height
-    // console.log(width, height);
 }
 
 function getImgs() {
@@ -157,5 +144,4 @@ function findImgById(id) {
         return img.id === id
     })
     return img
-
 }

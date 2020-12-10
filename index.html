@@ -24,16 +24,16 @@
         </div>
     </header>
     <main class="main-container flex main-layout space-between">
-        <!-- <div class="canvas-container"> -->
-        <canvas onclick="canvasCord(event)" class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
-        <!-- </div> -->
+
+        <canvas onclick="drawRect()" class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
+
         <div class="meme-operation flex cul align-center">
-            <input oninput="onChangeTxt(event,this.value)" class="meme-txt" type="text" placeholder="Meme Text" dir="auto">
+            <input oninput="onChangeTxt(this.value)" class="meme-txt" type="text" placeholder="Meme Text" dir="auto">
 
             <div class="line-manipulate">
                 <button onclick="onChangeLine()" class="line-manipulate"><img src="img/ICONS/change-lines.png" alt=""></button>
                 <button onclick="onSetNewLine()" class="line-manipulate"><img src="img/ICONS/add.png" alt=""></button>
-                <button onclick="onDeleteLine(event)" class="line-manipulate"><img src="img/ICONS/trash.png" alt=""></button>
+                <button onclick="onDeleteLine()" class="line-manipulate"><img src="img/ICONS/trash.png" alt=""></button>
             </div>
             <div class="text-manipulate">
                 <button><img onclick="onChangeFontSize('inc')" src="img/ICONS/increase.png" alt=""></button>
