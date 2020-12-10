@@ -1,0 +1,188 @@
+body {
+    margin: 0%;
+}
+
+canvas {
+    border: 1px solid;
+    min-width: 40%;
+    min-height: 20rem;
+    max-width: 55%;
+    max-height: 26rem;
+}
+
+.meme-operation img {
+    max-width: 100%;
+    max-height: 100%;
+    cursor: pointer;
+}
+
+.meme-operation button {
+    max-height: 2.5rem;
+    max-width: 2.5rem;
+}
+
+.meme-operation label img {
+    max-height: 2rem;
+    max-width: 2rem;
+}
+
+.done button {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+/* GALLERY  */
+
+.gallery-container {
+    display: none;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-rows: auto;
+    grid-gap: 3rem;
+    padding-top: 5.5rem;
+}
+
+.gallery-container img {
+    cursor: pointer;
+    max-width: 100%;
+    max-height: 100%;
+    border: solid 4px transparent;
+    transition: 0.2s;
+}
+
+.gallery-container img:hover {
+    border: solid 4px black;
+    border-radius: 5px;
+}
+
+
+/* MAIN-NAV */
+
+.main-header {
+    background-color: blueviolet;
+    margin-bottom: 2rem;
+    position: fixed;
+    width: 100vw;
+}
+
+.nav-links li {
+    /* margin-left: 0 2rem; */
+}
+
+.nav-links li:first-child {
+    border-right: solid 1px black;
+}
+
+.nav-links a {
+    display: flex;
+    height: 4.25rem;
+    width: 4rem;
+    color: rgb(15, 15, 15);
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* MAIN  */
+
+.main-footer {
+    margin-top: 2rem;
+}
+
+body>main {
+    padding-top: 5.5rem;
+    ;
+}
+
+body>main>div.meme-operation {
+    padding-inline-start: 10rem;
+}
+
+.meme-operation .meme-txt {
+    height: 3rem;
+    max-width: 100%;
+}
+
+
+/* LAYOUT */
+
+.main-layout {
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+
+/* HELPERS */
+
+
+/* list  */
+
+.clean-list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+
+/* flex-helpers */
+
+.flex {
+    display: flex;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+.cul {
+    flex-direction: column;
+}
+
+
+/* MOBILE */
+
+@media (max-width:750px) {
+    .gallery-container {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+    canvas {
+        min-width: 10%;
+        min-height: 12rem;
+        max-width: 90%;
+        max-height: 25rem;
+        margin: 0 auto;
+    }
+    .main-container {
+        flex-direction: column;
+    }
+    .main-layout {
+        max-width: 750px;
+    }
+}
+
+
+/* @media(max-width:870px) {
+    .main-container {
+        flex-direction: column;
+    }
+    .meme-operation {}
+} */
+
+
+/* @media(max-width:500px) {
+    .main-layout {
+        max-width: 350px;
+    }
+    .meme-operation.main-layout {
+        max-width: 300px;
+    }
+} */

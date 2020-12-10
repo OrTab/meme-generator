@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>My Meme</title>
+</head>
+
+<body onload="onInit()">
+
+
+    <header class="main-header">
+        <div class="main-nav main-layout flex space-between align-center">
+            <div class="logo">MemeGen</div>
+            <nav class="nav-container">
+                <ul class="nav-links flex clean-list">
+                    <li><a href onclick="renderGallery(event)">Gallery</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+                <nav>
+
+        </div>
+    </header>
+    <main class="main-container flex main-layout space-between">
+
+        <canvas onclick="drawRect()" class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
+
+        <div class="meme-operation flex cul align-center">
+            <input oninput="onChangeTxt(this.value)" class="meme-txt" type="text" placeholder="Meme Text" dir="auto">
+
+            <div class="line-manipulate">
+                <button onclick="onChangeLine()" class="line-manipulate"><img src="img/ICONS/change-lines.png" alt=""></button>
+                <button onclick="onSetNewLine()" class="line-manipulate"><img src="img/ICONS/add.png" alt=""></button>
+                <button onclick="onDeleteLine()" class="line-manipulate"><img src="img/ICONS/trash.png" alt=""></button>
+            </div>
+            <div class="text-manipulate">
+                <button><img onclick="onChangeFontSize('inc')" src="img/ICONS/increase.png" alt=""></button>
+                <button><img onclick="onChangeFontSize('dec')" src="img/ICONS/decrease.png" alt=""></button>
+                <button><img onclick="onChangeAlign('left')" src="img/ICONS/align-to-left.png" alt=""></button>
+                <button><img onclick="onChangeAlign('center')" src="img/ICONS/center-text-alignment.png" alt=""></button>
+                <button><img onclick="onChangeAlign('right')" src="img/ICONS/align-to-right.png" alt=""></button>
+            </div>
+            <div class="text-style">
+                <select onchange="onChangeFont(this.value)" name="select-fonts">
+                    <option value="impect">Impect</option>
+                    <option value="impect">Impect</option>
+                    <option value="">Impect</option>
+                    <option value="">Impect</option>
+                </select>
+                <label for="stroke-color">
+                    <img src="img/ICONS/text stroke.png" alt="">
+                    <input oninput="onChangeStrokeColor(this.value)" type="color" id="stroke-color">
+              </label>
+                <label for="font-color">
+                    <img src="img/ICONS/paint-board-and-brush.png">
+                    <input oninput="onChangeFillColor(this.value)" type="color" id="font-color">
+              </label>
+            </div>
+            <div class="done flex">
+                <button class="share">Share</button>
+                <button class="gen">Generate</button>
+            </div>
+        </div>
+
+    </main>
+
+    <div class="gallery-container main-layout"></div>
+
+
+
+    <footer class="main-footer flex cul align-center">
+        <div class="footer-logo">MemeGen</div>
+        <small>All Rights Reserved © OrTab </small>
+    </footer>
+
+
+    <!-- <script src="/js/meme-service.js"></script>
+    <script src="/js/meme-controller.js"></script>
+    <script src="/js/meme-storage.js"></script>
+    <script src="/js/meme-util.js"></script> -->
+
+    <script src="js/meme-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+    <script src="js/meme-storage.js"></script>
+    <script src="js/meme-util.js"></script>
+
+</body>
+
+</html>
