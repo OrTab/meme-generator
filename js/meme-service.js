@@ -93,22 +93,23 @@ function setChangeTxt(txt) {
 
 function createMeme(imgId) {
     gMeme = {
-            id: makeId(),
-            imgId,
-            lineIdx: 0,
-            lines: [{
-                txt: 'Create Your Meme',
-                fontSize: 35,
-                fontWidth: '2',
-                fontStyle: 'Impact',
-                align: 'left',
-                fillColor: 'black',
-                strokeColor: 'black',
-                offsetX: 0,
-                offsetY: 0,
-            }]
+        id: makeId(),
+        imgId,
+        lineIdx: 0,
+        lines: [{
+            txt: 'Create Your Meme',
+            fontSize: 35,
+            fontWidth: '2',
+            fontStyle: 'Impact',
+            align: 'left',
+            fillColor: 'black',
+            strokeColor: 'black',
+            offsetX: 0,
+            offsetY: 0,
+        }]
 
-        }
+    }
+    gCountLines = 0
         // if (!gMemes) gMemes = [gMeme]
         // else gMemes.push(gMeme)
         // console.log(gMemes);
