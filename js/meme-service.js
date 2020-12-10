@@ -1,7 +1,7 @@
 'use strict'
 var gMemes;
 var gMeme;
-
+var gCountLines = 0;
 var gImgs = [
     { id: 1, url: 'imgs-canvas/2.jpg', keywords: ['Happy', 'Nature'] },
     { id: 2, url: 'imgs-canvas/003.jpg', keywords: ['Funny', 'Celeb', 'Men', 'Angry'] },
@@ -34,12 +34,17 @@ function getMeme() {
     return gMeme;
 }
 
-function setNewLine() {
+function setNewLine(height) {
     var currLine = gMeme.lines[gMeme.lineIdx]
     var newLine = {...currLine }
-    newLine.txt = ''
+    newLine.txt = 'Create Your Meme'
+    newLine.offsetX = currLine.offsetX
     if (gMeme.lines.length) gMeme.lineIdx++
-        gMeme.lines.push(newLine)
+        if (gMeme.lineIdx === 1) {
+            newLine.offsetY = (height - currLine.fontSize - 10)
+        }
+    gMeme.lines.push(newLine)
+    gCountLines++
 }
 
 function changeLine() {
@@ -66,7 +71,9 @@ function changeFontSize(incOrDec) {
 }
 
 function changeAlign(direc) {
-    gMeme.lines[gMeme.lineIdx].align = direc
+    gMeme.lines.forEach(line => {
+        line.align = direc
+    })
 }
 
 function changeStrokeColor(strokeColor) {
@@ -80,6 +87,7 @@ function changeFillColor(fillColor) {
 }
 
 function setChangeTxt(txt) {
+    if (txt === '') txt = 'Create Your Meme'
     gMeme.lines[gMeme.lineIdx].txt = txt
 }
 
@@ -97,7 +105,7 @@ function createMeme(imgId) {
                 fillColor: 'black',
                 strokeColor: 'black',
                 offsetX: 0,
-                offsetY: 0
+                offsetY: 0,
             }]
 
         }
@@ -108,30 +116,27 @@ function createMeme(imgId) {
 
 function setCanvasSizes(width, height) {
     var currLine = gMeme.lines[gMeme.lineIdx]
-    var x;
-    var y;
+    if (!gCountLines) currLine.offsetY = (height + currLine.fontSize + 10) / 8
+    gMeme.lines.forEach(line => {
+        // var currLine = gMeme.lines[gMeme.lineIdx]
 
-    switch (currLine.align) {
-        case 'right':
-            x = width - 75
-            y = (height + currLine.fontSize + 10) / 8
-            break;
+        var x;
+        switch (line.align) {
+            case 'right':
+                line.offsetX = width - 60
+                    // if (!line.countsLines) line.offsetY = (height + line.fontSize + 10) / 8
+                break;
 
-        case 'center':
-            x = width / 2
-            y = (height + currLine.fontSize + 10) / 8
-            break;
-        case 'left':
-            x = 75
-            y = (height + currLine.fontSize + 10) / 8
-            break;
-
-    }
-    //if the canvas sizes too small
-    if (height < 250 && currLine.align == 'left') x -= 50
-    if (height < 250 && currLine.align == 'right') x += 50
-    gMeme.lines[gMeme.lineIdx].offsetX = x
-    gMeme.lines[gMeme.lineIdx].offsetY = y
+            case 'center':
+                line.offsetX = width / 2
+                    // if (!line.countsLines) line.offsetY = (height + line.fontSize + 10) / 8
+                break;
+            case 'left':
+                line.offsetX = width * 0.12
+                    // if (!line.countsLines) line.offsetY = (height + line.fontSize + 10) / 8
+                break;
+        }
+    })
 }
 
 function getImgs() {

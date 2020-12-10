@@ -44,10 +44,12 @@ function onChangeFillColor(fillColor) {
 
 function onChangeLine() {
     changeLine()
+    renderMeme()
 }
 
 function onSetNewLine() {
-    setNewLine()
+    setNewLine(gCanvas.height)
+    renderMeme()
 }
 
 function onDeleteLine() {
@@ -89,10 +91,11 @@ function renderCanvas(imgId) {
     var currImg = findImgById(imgId)
     var img = new Image();
     img.src = currImg.url
-
+        // gCtx.imageSmoothingQuality = 'high'
     gCanvas.width = img.width;
     gCanvas.height = img.height;
     gCtx.drawImage(img, 0, 0);
+    gCtx.imageSmoothingQuality = 'high'
     var elMemeContainer = document.querySelector('.main-container')
     elMemeContainer.style.display = 'flex';
     var elGalleryContainer = document.querySelector('.gallery-container')
@@ -108,16 +111,19 @@ function updateCanvasSizes() {
 function renderMeme() {
 
     var currMeme = getMeme()
-    var currLine = currMeme.lines[currMeme.lineIdx]
     renderCanvas(currMeme.imgId)
-    checkAlign(currLine)
-    if (!currMeme.lines.length) return
-    gCtx.lineWidth = currLine.fontWidth
-    gCtx.font = `${currLine.fontSize}px ${currLine.fontStyle} `
-    gCtx.strokeStyle = currLine.strokeColor
-    gCtx.fillStyle = currLine.fillColor
-    gCtx.fillText(currLine.txt, currLine.x, currLine.y)
-    gCtx.strokeText(currLine.txt, currLine.offsetX, currLine.offsetY)
+    currMeme.lines.forEach(line => {
+        // var currLine = currMeme.lines[currMeme.lineIdx]
+        checkAlign()
+        if (!currMeme.lines.length) return
+        gCtx.lineWidth = line.fontWidth
+        gCtx.font = `${line.fontSize}px ${line.fontStyle} `
+        gCtx.strokeStyle = line.strokeColor
+        gCtx.fillStyle = line.fillColor
+            // gCtx.fillText(line.txt, line.offsetX, line.offsetY)
+        gCtx.strokeText(line.txt, line.offsetX, line.offsetY)
+
+    })
     drawRect()
 }
 
@@ -133,16 +139,16 @@ function drawRect() {
     var text = gCtx.measureText(currLine.txt)
     gCtx.beginPath()
     gCtx.strokeStyle = 'black'
-    var align = checkAlign(currLine)
-    switch (align) {
+        // var align = checkAlign(currLine)
+    switch (currLine.align) {
         case 'left':
-            gCtx.rect(currLine.offsetX - 20, currLine.offsetY + 20, text.width + 30, -currLine.fontSize - 20)
+            gCtx.rect(currLine.offsetX - 20, currLine.offsetY + 15, text.width + 30, -currLine.fontSize - 20)
             break;
         case 'right':
-            gCtx.rect(currLine.offsetX + 20, currLine.offsetY + 20, -text.width - 80, -currLine.fontSize - 20)
+            gCtx.rect(currLine.offsetX + 20, currLine.offsetY + 15, -text.width - 30, -currLine.fontSize - 20)
             break;
         case 'center':
-            gCtx.rect((currLine.offsetX - text.width / 2) - 20, currLine.offsetY + 20, text.width + 30, -currLine.fontSize - 20)
+            gCtx.rect((currLine.offsetX - text.width / 2) - 20, currLine.offsetY + 15, text.width + 30, -currLine.fontSize - 20)
             break;
 
     }
@@ -152,21 +158,26 @@ function drawRect() {
 }
 
 
-function checkAlign(line) {
-    if (line.align === 'right') {
-        gCtx.direction = 'rtl'
-        gCtx.textAlign = 'right'
-        return 'right'
-    }
-    if (line.align === 'left') {
-        gCtx.direction = 'ltr'
-        gCtx.textAlign = 'left'
-        return 'left'
+function checkAlign() {
+    var meme = getMeme()
+    meme.lines.forEach(line => {
+        console.log(line);
 
-    }
-    if (line.align = 'center') {
-        gCtx.direction = 'inherit'
-        gCtx.textAlign = 'center'
-        return 'center'
-    }
+        if (line.align === 'right') {
+            gCtx.direction = 'rtl'
+            gCtx.textAlign = 'right'
+            return 'right'
+        }
+        if (line.align === 'left') {
+            gCtx.direction = 'ltr'
+            gCtx.textAlign = 'left'
+            return 'left'
+
+        }
+        if (line.align = 'center') {
+            gCtx.direction = 'inherit'
+            gCtx.textAlign = 'center'
+            return 'center'
+        }
+    })
 }
