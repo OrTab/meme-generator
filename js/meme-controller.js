@@ -60,6 +60,13 @@ function onCreateMeme(imgId) {
 
 }
 
+function onChangeStrokeWidth(strokeWidth) {
+    var strokeWidthSpan = document.querySelector('.strokeWidth')
+    strokeWidthSpan.innerText = strokeWidth
+    changeStrokeWidth(strokeWidth)
+    renderMeme()
+}
+
 function onChangeTxt(txt) {
     setChangeTxt(txt)
     renderMeme()
@@ -113,12 +120,12 @@ function renderMeme() {
     currMeme.lines.forEach(line => {
         checkAlign()
         if (!currMeme.lines.length) return
-        gCtx.lineWidth = line.fontWidth
+        gCtx.lineWidth = line.strokeWidth
         gCtx.font = `${line.fontSize}px ${line.fontStyle} `
         gCtx.strokeStyle = line.strokeColor
         gCtx.fillStyle = line.fillColor
         gCtx.textBaseline = "bottom"
-            // gCtx.fillText(line.txt, line.offsetX, line.offsetY)
+        gCtx.fillText(line.txt, line.offsetX, line.offsetY)
         gCtx.strokeText(line.txt, line.offsetX, line.offsetY)
     })
     drawRect()

@@ -18,6 +18,12 @@
         cursor: pointer;
     }
     
+    input::placeholder {
+        font-family: fantasy;
+        font-weight: thin;
+        letter-spacing: 0.4px;
+    }
+    
     button {
         cursor: pointer;
     }
@@ -142,7 +148,7 @@
     .moveToGallery-btn {
         position: absolute;
         top: 32vh;
-        left: 14vw;
+        left: 13vw;
         font-size: 3rem;
         max-width: 15rem;
         border-style: dashed;
@@ -157,14 +163,32 @@
         background-color: rgb(241, 218, 245);
     }
     
+    .meme-operation select {
+        font-weight: 200;
+        background-color: transparent;
+        font-family: Impact, Haettenschweiler, sans-serif;
+        font-size: 1rem;
+    }
+    
     .meme-operation button {
+        border-radius: 7px;
         max-height: 2.5rem;
         max-width: 2.5rem;
+        font-family: Impact, Haettenschweiler, sans-serif;
+        font-size: 1rem;
+    }
+    
+    .meme-operation button:hover {
+        background-color: rgb(250, 234, 234);
     }
     
     .meme-operation label img {
         max-height: 2rem;
         max-width: 2rem;
+    }
+    
+    .stroke {
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     }
     
     .done button {
@@ -193,11 +217,14 @@
         margin-inline-end: 0.2rem;
     }
     
-    .text-style {}
+    .text-style input {
+        /* display: none; */
+    }
     
     .done a {
         color: black;
         text-decoration: none;
+        font-family: Impact, 'Arial Narrow Bold', sans-serif;
     }
     /* FOOTER  */
     

@@ -14,7 +14,6 @@ var gImgs = [
     { id: 7, url: 'imgs-canvas/8.jpg', keywords: ['All', 'Men', 'Love'] },
     { id: 8, url: 'imgs-canvas/9.jpg', keywords: ['All', 'Funny'] },
     { id: 9, url: 'imgs-canvas/12.jpg', keywords: ['All', 'Men'] },
-    { id: 10, url: 'imgs-canvas/19.jpg', keywords: ['All', 'Men', 'Funny', 'Angry'] },
     { id: 11, url: 'imgs-canvas/Ancient-Aliens.jpg', keywords: ['All', 'Men', 'Movies', 'Explanation'] },
     { id: 12, url: 'imgs-canvas/drevil.jpg', keywords: ['All', 'Victory', 'Funny', 'Men'] },
     { id: 13, url: 'imgs-canvas/img2.jpg', keywords: ['All', 'Funny', 'Victory'] },
@@ -73,7 +72,6 @@ function deleteLine() {
 }
 
 function changeFont(font) {
-    console.log(font);
     gMeme.lines[gMeme.lineIdx].fontStyle = font
 }
 
@@ -90,6 +88,11 @@ function changeAlign(direc) {
 
 function changeStrokeColor(strokeColor) {
     gMeme.lines[gMeme.lineIdx].strokeColor = strokeColor;
+
+}
+
+function changeStrokeWidth(strokeWidth) {
+    gMeme.lines[gMeme.lineIdx].strokeWidth = strokeWidth;
 
 }
 
@@ -112,11 +115,11 @@ function createMeme(imgId, height) {
         lines: [{
             txt: 'Create Your Meme',
             fontSize: 35,
-            fontWidth: '2',
+            strokeWidth: '2',
             fontStyle: 'Impact',
             align: 'left',
             fillColor: 'black',
-            strokeColor: 'black',
+            strokeColor: 'white',
             offsetX: 0,
             offsetY: 0,
         }]

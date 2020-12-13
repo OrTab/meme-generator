@@ -25,7 +25,7 @@
 
         </div>
     </header>
-    <main class="main-container flex main-layout">
+    <main class="main-container flex main-layout space-between">
         <button class="moveToGallery-btn" onclick="renderGallery(event)">Choose Your Meme!</button>
         <div class="canvas-container">
             <canvas onmousedown="checkIfTextLineClicked(event)" onmouseup="dragNdrop(event)" class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
@@ -45,6 +45,10 @@
                 <button><img onclick="onChangeAlign('left')" src="img/ICONS/align-to-left.png" alt=""></button>
                 <button><img onclick="onChangeAlign('center')" src="img/ICONS/center-text-alignment.png" alt=""></button>
                 <button><img onclick="onChangeAlign('right')" src="img/ICONS/align-to-right.png" alt=""></button>
+            </div>
+            <div class="stroke">
+                <label for="">Stroke Width</label>
+                <input onchange="onChangeStrokeWidth(this.value)" type="range" value="2" min="1" max="10"><span class="strokeWidth">  2</span>
             </div>
             <div class="text-style">
                 <select onchange="onChangeFont(this.value)" name="select-fonts">
@@ -66,10 +70,10 @@
 
                 <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
                     <input name="img" id="imgData" type="hidden" />
-                    <button class="btn" type="submit">Publish</button>
+                    <button class="btn" type="submit">Share</button>
                     <button class="gen"><a href="#"  onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
                     </button>
-                    <div class="share-container"></div>
+                    <div class="share-container flex justify-center"></div>
                 </form>
             </div>
         </div>
