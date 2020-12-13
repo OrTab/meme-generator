@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet">
     <title>My Meme</title>
 </head>
 
@@ -15,19 +16,22 @@
         <div class="main-nav main-layout flex space-between align-center">
             <div class="logo">MemeGen</div>
             <nav class="nav-container">
-                <ul class="nav-links flex clean-list">
+                <ul class="nav-links flex clean-list align-center">
                     <li><a href onclick="renderGallery(event)">Gallery</a></li>
-                    <li><a href="#">About</a></li>
+                    <li><a onclick="renderMeme()" href="#">Create Meme</a></li>
+                    <!-- <li><a href="#">About</a></li> -->
                 </ul>
                 <nav>
 
         </div>
     </header>
-    <main class="main-container flex main-layout space-between">
+    <main class="main-container flex main-layout">
+        <button class="moveToGallery-btn" onclick="renderGallery(event)">Choose Your Meme!</button>
+        <div class="canvas-container">
+            <canvas onmousedown="checkIfTextLineClicked(event)" onmouseup="dragNdrop(event)" class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
+        </div>
 
-        <canvas onclick="drawRect()" class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
-
-        <div class="meme-operation flex cul align-center">
+        <div class="meme-operation flex cul align-center ">
             <input oninput="onChangeTxt(this.value)" class="meme-txt" type="text" placeholder="Meme Text" dir="auto">
 
             <div class="line-manipulate">
@@ -44,10 +48,10 @@
             </div>
             <div class="text-style">
                 <select onchange="onChangeFont(this.value)" name="select-fonts">
-                    <option value="impect">Impect</option>
-                    <option value="impect">Impect</option>
-                    <option value="">Impect</option>
-                    <option value="">Impect</option>
+                    <option value="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">Impect</option>
+                    <option value="Ariel">Ariel</option>
+                    <option value="'Cinzel', serif">Cinzel</option>
+                    <option value="monospace,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Monospace</option>
                 </select>
                 <label for="stroke-color">
                     <img src="img/ICONS/text stroke.png" alt="">
@@ -59,21 +63,30 @@
               </label>
             </div>
             <div class="done flex">
-                <button class="share">Share</button>
-                <button class="gen">Generate</button>
+
+                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                    <input name="img" id="imgData" type="hidden" />
+                    <button class="btn" type="submit">Publish</button>
+                    <button class="gen"><a href="#"  onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
+                    </button>
+                    <div class="share-container"></div>
+                </form>
             </div>
         </div>
 
     </main>
-
-    <div class="gallery-container main-layout"></div>
-
+    <div class="main-gallery main-layout">
+        <button class="menu-btn flex justify-center" onclick="showkeywords()">☰</button>
+        <div class="img-keys main-layout"></div>
+        <div class="gallery-container main-layout"></div>
+    </div>
 
 
     <footer class="main-footer flex cul align-center">
         <div class="footer-logo">MemeGen</div>
         <small>All Rights Reserved © OrTab </small>
     </footer>
+
 
 
     <!-- <script src="/js/meme-service.js"></script>
