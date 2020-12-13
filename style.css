@@ -52,7 +52,7 @@
     
     .nav-links li {
         border-bottom: solid 5px transparent;
-        transition: 0.5s;
+        transition: 0.2s;
     }
     
     .nav-links li:not(:last-child) {
@@ -141,10 +141,6 @@
         cursor: pointer;
     }
     
-    .main-container {
-        /* position: relative; */
-    }
-    
     .moveToGallery-btn {
         position: absolute;
         top: 32vh;
@@ -159,11 +155,11 @@
     .moveToGallery-btn:hover {
         transition: 1.2s;
         transform: rotate(360deg);
-        /* width: 18rem; */
-        background-color: rgb(241, 218, 245);
+        background-color: rgba(255, 232, 232, 0.836);
     }
     
     .meme-operation select {
+        cursor: pointer;
         font-weight: 200;
         background-color: transparent;
         font-family: Impact, Haettenschweiler, sans-serif;
@@ -179,7 +175,7 @@
     }
     
     .meme-operation button:hover {
-        background-color: rgb(250, 234, 234);
+        background-color: rgba(255, 196, 196, 0.719);
     }
     
     .meme-operation label img {
