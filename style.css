@@ -142,7 +142,7 @@
     
     .moveToGallery-btn {
         position: absolute;
-        top: 28vh;
+        top: 25vh;
         left: 11vw;
         font-size: 3rem;
         max-width: 15rem;
@@ -378,8 +378,8 @@
     @media(min-width:1250px) {
         .moveToGallery-btn {
             position: absolute;
-            top: 25vh;
-            left: 15vw;
+            top: 30vh;
+            left: 13.5vw;
         }
     }
     
