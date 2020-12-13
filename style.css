@@ -19,7 +19,7 @@
     }
     
     input::placeholder {
-        font-family: fantasy;
+        font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
         font-weight: thin;
         letter-spacing: 0.4px;
     }
@@ -111,7 +111,6 @@
     .img-keys button {
         margin: 1.5rem 0;
         margin-inline: 0.5rem;
-        font-size: 1rem;
         background-color: transparent;
         color: whitesmoke;
         font-family: 'Cinzel', serif;
@@ -211,10 +210,6 @@
     
     .text-manipulate button:not(:last-child) {
         margin-inline-end: 0.2rem;
-    }
-    
-    .text-style input {
-        /* display: none; */
     }
     
     .done a {
@@ -328,7 +323,7 @@
         }
         .menu-btn {
             position: fixed;
-            left: 50vw;
+            left: 45vw;
             top: 5.5vh;
             z-index: 1;
             background-color: transparent;
