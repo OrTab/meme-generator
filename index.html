@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Viaoda+Libre&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&display=swap" rel="stylesheet">
     <title>My Meme</title>
 </head>
 
@@ -14,7 +18,7 @@
 
     <header class="main-header">
         <div class="main-nav main-layout flex space-between align-center">
-            <div class="logo">MemeGen</div>
+            <div onclick="renderMeme()" class="logo">MemeGen</div>
             <nav class="nav-container">
                 <ul class="nav-links flex clean-list align-center">
                     <li><a href onclick="renderGallery(event)">Gallery</a></li>
@@ -25,56 +29,58 @@
 
         </div>
     </header>
-    <main class="main-container flex main-layout space-between">
-        <button class="moveToGallery-btn" onclick="renderGallery(event)">Choose Your Meme!</button>
-        <div class="canvas-container">
-            <canvas onmousedown="checkIfTextLineClicked(event)" onmouseup="dragNdrop(event)" class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
-        </div>
 
-        <div class="meme-operation flex cul align-center ">
-            <input oninput="onChangeTxt(this.value)" class="meme-txt" type="text" placeholder="Meme Text" dir="auto">
+    <main class="main-container flex main-layout">
+        <button class="moveToGallery-btn" onclick="renderGallery(event)">Press&Choose Your Meme!</button>
+        <div class="meme-layout flex space-between">
+            <div class="canvas-container">
+                <canvas onmousedown="checkIfTextLineClicked(event)" onmouseup="dragNdrop(event)" class="canvas" id="my-canvas" height="450px" width="450px"></canvas>
+            </div>
 
-            <div class="line-manipulate">
-                <button onclick="onChangeLine()" class="line-manipulate"><img src="img/ICONS/change-lines.png" alt=""></button>
-                <button onclick="onSetNewLine()" class="line-manipulate"><img src="img/ICONS/add.png" alt=""></button>
-                <button onclick="onDeleteLine()" class="line-manipulate"><img src="img/ICONS/trash.png" alt=""></button>
-            </div>
-            <div class="text-manipulate">
-                <button><img onclick="onChangeFontSize('inc')" src="img/ICONS/increase.png" alt=""></button>
-                <button><img onclick="onChangeFontSize('dec')" src="img/ICONS/decrease.png" alt=""></button>
-                <button><img onclick="onChangeAlign('left')" src="img/ICONS/align-to-left.png" alt=""></button>
-                <button><img onclick="onChangeAlign('center')" src="img/ICONS/center-text-alignment.png" alt=""></button>
-                <button><img onclick="onChangeAlign('right')" src="img/ICONS/align-to-right.png" alt=""></button>
-            </div>
-            <div class="stroke">
-                <label for="">Stroke Width</label>
-                <input onchange="onChangeStrokeWidth(this.value)" type="range" value="2" min="1" max="10"><span class="strokeWidth">  2</span>
-            </div>
-            <div class="text-style">
-                <select onchange="onChangeFont(this.value)" name="select-fonts">
+            <div class="meme-operation flex cul align-center justify-center ">
+                <input oninput="onChangeTxt(this.value)" class="meme-txt" type="text" placeholder="Meme Text" dir="auto">
+
+                <div class="line-manipulate">
+                    <button onclick="onChangeLine()" class="line-manipulate"><img src="img/ICONS/change-lines.png" alt=""></button>
+                    <button onclick="onSetNewLine()" class="line-manipulate"><img src="img/ICONS/add.png" alt=""></button>
+                    <button onclick="onDeleteLine()" class="line-manipulate"><img src="img/ICONS/trash.png" alt=""></button>
+                </div>
+                <div class="text-manipulate">
+                    <button><img onclick="onChangeFontSize('inc')" src="img/ICONS/increase.png" alt=""></button>
+                    <button><img onclick="onChangeFontSize('dec')" src="img/ICONS/decrease.png" alt=""></button>
+                    <button><img onclick="onChangeAlign('left')" src="img/ICONS/align-to-left.png" alt=""></button>
+                    <button><img onclick="onChangeAlign('center')" src="img/ICONS/center-text-alignment.png" alt=""></button>
+                    <button><img onclick="onChangeAlign('right')" src="img/ICONS/align-to-right.png" alt=""></button>
+                </div>
+                <div class="stroke">
+                    <label for="">Stroke Width</label>
+                    <input onchange="onChangeStrokeWidth(this.value)" type="range" value="2" min="1" max="10"><span class="strokeWidth">  2</span>
+                </div>
+                <div class="text-style">
+                    <select onchange="onChangeFont(this.value)" name="select-fonts">
                     <option value="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif">Impect</option>
                     <option value="Ariel">Ariel</option>
                     <option value="'Cinzel', serif">Cinzel</option>
                     <option value="monospace,'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">Monospace</option>
                 </select>
-                <label for="stroke-color">
-                    <img src="img/ICONS/text stroke.png" alt="">
+                    <label for="stroke-color">
+                    <img class="color-img" src="img/ICONS/text stroke.png" alt="">
                     <input oninput="onChangeStrokeColor(this.value)" type="color" id="stroke-color">
               </label>
-                <label for="font-color">
-                    <img src="img/ICONS/paint-board-and-brush.png">
+                    <label for="font-color">
+                    <img class="color-img" src="img/ICONS/paint-board-and-brush.png">
                     <input oninput="onChangeFillColor(this.value)" type="color" id="font-color">
               </label>
-            </div>
-            <div class="done flex">
-
-                <form action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
-                    <input name="img" id="imgData" type="hidden" />
-                    <button class="btn" type="submit">Share</button>
-                    <button class="gen"><a href="#"  onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
+                </div>
+                <div class="done">
+                    <form class="flex justify-center" action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                        <input name="img" id="imgData" type="hidden" />
+                        <button class="btn" type="submit">Share</button>
+                        <button class="gen"><a href="#"  onclick="downloadImg(this)" download="my-img.jpg">Download as jpeg</a>
                     </button>
-                    <div class="share-container flex justify-center"></div>
-                </form>
+                        <div class="share-container flex justify-center"></div>
+                    </form>
+                </div>
             </div>
         </div>
 

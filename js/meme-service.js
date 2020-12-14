@@ -175,28 +175,49 @@ function imgsKeyWords() {
     }, [])
 
     gKeywordsMap = keywords.reduce((acc, key) => {
-        if (!acc[key]) acc[key] = 1
-        else acc[key] += 1
+        if (!acc[key]) acc[key] = 18
+        else acc[key] = 18
         return acc
     }, {})
+
 }
 
-function imgsForDisplay(keyword) {
+function imgsForDisplay(keyword, isSearch) {
+    if (keyword === '') return
     var imgs = []
-    gImgs.forEach(img => {
-        img.keywords.forEach((key) => {
-            if (key === keyword)
-                imgs.push(img)
-
+    if (!isSearch) {
+        gImgs.forEach(img => {
+            img.keywords.forEach(key => {
+                if (key === keyword) imgs.push(img)
+            })
         })
-    })
-    return imgs
+        return imgs
+    } else {
+        var acc = {}
+        gImgs.forEach(img => {
+            img.keywords.forEach(key => {
+                key = key.toLocaleLowerCase()
+                if (key.includes(keyword) && key.charAt(0) === keyword.charAt(0)) {
+                    if (!acc[img.id]) acc[img.id] = 1
+                    else acc[img.id]++
+
+                }
+            }, {})
+        })
+        var imgIds = Object.keys(acc)
+        var filterImgs = imgIds.map(id => {
+            return findImgById(+id)
+        })
+    }
+    return filterImgs
+}
+
+function updateKeywordPopularity(keyword) {
+    gKeywordsMap[keyword] += 2
 }
 
 function getkeywords() {
-    imgsKeyWords()
-    var keywords = Object.keys(gKeywordsMap)
-    return keywords
+    return gKeywordsMap
 }
 
 function uploadImg(elForm, ev) {

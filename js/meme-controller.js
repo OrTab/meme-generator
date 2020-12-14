@@ -9,6 +9,8 @@ var gDrag;
 function onInit() {
     gCanvas = document.getElementById('my-canvas')
     gCtx = gCanvas.getContext('2d')
+    imgsKeyWords()
+    renderKeyWords()
 }
 
 function onChangeFontSize(size) {
@@ -91,7 +93,6 @@ function renderGallery(ev, imgs) {
     var elGalleryContainer = document.querySelector('.gallery-container')
     elGalleryContainer.innerHTML = strHtmls.join('')
     elGalleryContainer.style.display = 'grid'
-    renderKeyWords()
 
 }
 
@@ -107,12 +108,13 @@ function renderCanvas(imgId) {
     elMemeContainer.style.display = 'flex';
     var elGalleryContainer = document.querySelector('.main-gallery')
     elGalleryContainer.style.display = 'none'
-    gCanvas.style.border = 'none'
+    gCanvas.classList.add('shadow')
 }
 
 
 function renderMeme() {
     var currMeme = getMeme()
+    if (!currMeme) window.location = 'index.html'
     var currLine = currMeme.lines[currMeme.lineIdx]
     renderCanvas(currMeme.imgId)
     var elTxtInput = document.querySelector('.meme-txt')
@@ -253,17 +255,22 @@ function downloadImg(elLink) {
 
 function renderKeyWords() {
     var keywords = getkeywords()
-    var strHtmls = keywords.map(key => {
-        return `<button onclick="onKeywordClick(event,'${key}')">${key}</button>`
-    })
+    var strHtmls = ''
+    for (var k in keywords) {
+        strHtmls += `<button style="font-size:${keywords[k]}px;" onclick="onKeywordClick(event,'${k}')">${k}</button>`
+    }
+    strHtmls += `<input oninput="filterKeywords(event,this.value)" type="text" placeholder="Type To Filter">`
+
     var elImgKeysContainer = document.querySelector('.img-keys')
-    elImgKeysContainer.innerHTML = strHtmls.join('')
+    elImgKeysContainer.innerHTML = strHtmls
 }
 
 function onKeywordClick(ev, keyword) {
+    updateKeywordPopularity(keyword)
     showkeywords()
-    var imgs = imgsForDisplay(keyword)
+    var imgs = imgsForDisplay(keyword, false)
     renderGallery(ev, imgs)
+    renderKeyWords()
 }
 
 function focusInput() {
@@ -276,4 +283,10 @@ function focusInput() {
 function showkeywords() {
     var elImgKeysContainer = document.querySelector('.img-keys')
     elImgKeysContainer.classList.toggle('open')
+}
+
+function filterKeywords(ev, key) {
+    var imgs = imgsForDisplay(key.toLowerCase(), true)
+    renderGallery(ev, imgs)
+
 }
